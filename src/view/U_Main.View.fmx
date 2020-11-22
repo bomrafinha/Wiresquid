@@ -1,0 +1,197 @@
+object MainView: TMainView
+  Left = 0
+  Top = 0
+  BorderStyle = Single
+  Caption = 'WireSquid'
+  ClientHeight = 600
+  ClientWidth = 940
+  Position = ScreenCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object Memo1: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    Position.X = 24.000000000000000000
+    Position.Y = 184.000000000000000000
+    Size.Width = 457.000000000000000000
+    Size.Height = 209.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Viewport.Width = 453.000000000000000000
+    Viewport.Height = 205.000000000000000000
+  end
+  object Button1: TButton
+    Position.X = 552.000000000000000000
+    Position.Y = 248.000000000000000000
+    TabOrder = 3
+    Text = 'Button1'
+    OnClick = Button1Click
+  end
+  object LayoutHeader: TLayout
+    Align = Top
+    Position.Y = 40.000000000000000000
+    Size.Width = 940.000000000000000000
+    Size.Height = 72.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 5
+    object PanelHeader: TPanel
+      Align = Contents
+      Size.Width = 940.000000000000000000
+      Size.Height = 72.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object LayoutInfoLinha01: TLayout
+        Align = Top
+        Size.Width = 940.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        object Text1: TText
+          Align = Left
+          Margins.Left = 9.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Position.X = 9.000000000000000000
+          Size.Width = 380.000000000000000000
+          Size.Height = 24.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.HorzAlign = Leading
+        end
+        object Text2: TText
+          Align = Client
+          Margins.Left = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Size.Width = 272.000000000000000000
+          Size.Height = 24.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.HorzAlign = Leading
+        end
+        object Text6: TText
+          Align = Right
+          Margins.Left = 5.000000000000000000
+          Margins.Right = 9.000000000000000000
+          Position.X = 681.000000000000000000
+          Size.Width = 250.000000000000000000
+          Size.Height = 24.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.HorzAlign = Leading
+        end
+      end
+      object LayoutInfoLinha03: TLayout
+        Align = Bottom
+        Position.Y = 48.000000000000000000
+        Size.Width = 940.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object Text8: TText
+          Align = FitLeft
+          Margins.Left = 9.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Position.X = 9.000000000000000000
+          Size.Width = 380.000000000000000000
+          Size.Height = 24.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.HorzAlign = Leading
+        end
+        object Text9: TText
+          Align = Right
+          Margins.Left = 5.000000000000000000
+          Margins.Right = 9.000000000000000000
+          Position.X = 681.000000000000000000
+          Size.Width = 250.000000000000000000
+          Size.Height = 24.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.HorzAlign = Leading
+        end
+        object Text4: TText
+          Align = Client
+          Margins.Left = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Size.Width = 272.000000000000000000
+          Size.Height = 24.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.HorzAlign = Leading
+        end
+      end
+      object LayoutInfoLinha02: TLayout
+        Align = Client
+        Size.Width = 940.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object Text5: TText
+          Align = Right
+          Margins.Left = 5.000000000000000000
+          Margins.Right = 9.000000000000000000
+          Position.X = 681.000000000000000000
+          Size.Width = 250.000000000000000000
+          Size.Height = 24.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.HorzAlign = Leading
+        end
+        object Text7: TText
+          Align = Left
+          Margins.Left = 9.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Position.X = 9.000000000000000000
+          Size.Width = 380.000000000000000000
+          Size.Height = 24.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.HorzAlign = Leading
+        end
+        object Text3: TText
+          Align = Client
+          Margins.Left = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Size.Width = 272.000000000000000000
+          Size.Height = 24.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.HorzAlign = Leading
+        end
+      end
+    end
+  end
+  object StatusBar1: TStatusBar
+    Position.Y = 578.000000000000000000
+    ShowSizeGrip = True
+    Size.Width = 940.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 6
+  end
+  object ToolBar1: TToolBar
+    Size.Width = 940.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 7
+  end
+  object MainMenu1: TMainMenu
+    Left = 560
+    Top = 168
+    object MenuItem01Arquivo: TMenuItem
+      Text = 'Arquivo'
+      object MenuItem02Fechar: TMenuItem
+        Locked = True
+        Text = 'Fechar'
+        OnClick = MenuItem02FecharClick
+      end
+    end
+  end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 500
+    Left = 704
+    Top = 136
+  end
+  object ipwIPMonitor1: TipwIPMonitor
+    Left = 576
+    Top = 352
+  end
+  object ipwIPInfo1: TipwIPInfo
+    Left = 576
+    Top = 312
+  end
+end
