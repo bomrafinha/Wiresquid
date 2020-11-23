@@ -32,7 +32,10 @@ begin
       adapter.AdapterSubnetMask,
       adapter.AdapterType,
       adapter.LocalHost,
-      adapter.NodeType
+      adapter.NodeType,
+      adapter.DeviceIndex,
+      adapter.DeviveName,
+      adapter.DeviveStatus
     )
   );
 

@@ -9,7 +9,7 @@ uses
   FMX.Grid.Style, FMX.Controls.Presentation, FMX.ScrollBox, FMX.Grid, Data.DB,
   Datasnap.DBClient, Data.Bind.EngExt, Fmx.Bind.DBEngExt, Fmx.Bind.Grid,
   System.Bindings.Outputs, Fmx.Bind.Editors, Data.Bind.Components,
-  Data.Bind.Grid, Data.Bind.DBScope, FMX.StdCtrls;
+  Data.Bind.Grid, Data.Bind.DBScope, FMX.StdCtrls, U_Portuguese, U_Translation;
 
 type
   TInitialView = class(TForm)
@@ -38,6 +38,7 @@ type
       fAdapterIndex : Integer;
 
     procedure setAdaptersList();
+    procedure setLabels();
 
   public
     constructor Create (Sender: TComponent; aAdapterList: TAdapterList);
@@ -94,6 +95,13 @@ begin
   begin
     StringGridAdapters.Cells[0, I] := Self.fAdapterList[I].AdapterDescription;
   end;
+
+end;
+
+procedure TInitialView.setLabels;
+begin
+  Adaptadores.Header := TTranslation<TPortuguese>.Language.InitialView.GridColumn01;
+  ButtonOK.Text := TTranslation<TPortuguese>.Language.InitialView.ButtonOK;
 
 end;
 

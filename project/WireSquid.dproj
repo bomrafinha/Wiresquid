@@ -203,8 +203,21 @@
         </DCCReference>
         <DCCReference Include="..\src\dto\U_Adapter.dto.pas"/>
         <DCCReference Include="..\src\dto\U_AdapterList.dto.pas"/>
-        <DCCReference Include="..\src\generics\U_Functions.Generics.pas"/>
-        <DCCReference Include="..\src\enums\U_Strings.Enum.pas"/>
+        <DCCReference Include="..\src\translation\U_Portuguese.pas"/>
+        <DCCReference Include="..\src\translation\U_Translation.pas"/>
+        <DCCReference Include="..\src\generic\U_Generic.Functions.pas"/>
+        <DCCReference Include="..\src\view\U_Arp.View.pas">
+            <Form>ArpView</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="..\src\view\U_Ping.View.pas">
+            <Form>PingView</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="..\src\view\U_Traceroute.View.pas">
+            <Form>Form2</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

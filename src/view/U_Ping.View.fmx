@@ -1,0 +1,65 @@
+object PingView: TPingView
+  Left = 0
+  Top = 0
+  BorderStyle = Single
+  Caption = 'Wiresquid - Ping'
+  ClientHeight = 480
+  ClientWidth = 640
+  Fill.Color = xFFC8BEE6
+  Fill.Kind = Solid
+  Position = OwnerFormCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object LayoutHeader: TLayout
+    Align = Top
+    Size.Width = 640.000000000000000000
+    Size.Height = 97.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    object Button1: TButton
+      Position.X = 464.000000000000000000
+      Position.Y = 16.000000000000000000
+      TabOrder = 1
+      Text = 'Button1'
+      OnClick = Button1Click
+    end
+    object Button2: TButton
+      Position.X = 464.000000000000000000
+      Position.Y = 56.000000000000000000
+      TabOrder = 0
+      Text = 'Button1'
+      OnClick = Button2Click
+    end
+  end
+  object LayoutContent: TLayout
+    Align = Client
+    Size.Width = 640.000000000000000000
+    Size.Height = 383.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object MemoPong: TMemo
+      Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+      DataDetectorTypes = []
+      ReadOnly = True
+      Align = Contents
+      Margins.Left = 5.000000000000000000
+      Margins.Top = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Margins.Bottom = 5.000000000000000000
+      Size.Width = 630.000000000000000000
+      Size.Height = 373.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Viewport.Width = 626.000000000000000000
+      Viewport.Height = 369.000000000000000000
+    end
+  end
+  object ipwPing1: TipwPing
+    OnResponse = ipwPing1Response
+    Left = 576
+    Top = 328
+  end
+end

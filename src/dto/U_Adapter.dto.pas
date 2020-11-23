@@ -15,14 +15,17 @@ type
     fAdapterType : String;
     fLocalHost : String;
     fNodeType : String;
+    fDeviveName: String;
+    fDeviceIndex: String;
+    fDeviveStatus: String;
 
   public
     constructor Create(); Overload;
     constructor Create(
       aAdapterDescription, aAdapterGateway, aAdapterIndex,
       aAdapterIPAddress, aAdapterIPv6Address, aAdapterPhysicalAddress,
-      aAdapterSubnetMask, aAdapterType, aLocalHost, aNodeType : String
-    ); Overload;
+      aAdapterSubnetMask, aAdapterType, aLocalHost, aNodeType,
+      aDeviveName, aDeviceIndex, aDeviveStatus : String); Overload;
 
     property AdapterDescription : String read fAdapterDescription write fAdapterDescription;
     property AdapterGateway : String read fAdapterGateway write fAdapterGateway;
@@ -34,6 +37,9 @@ type
     property AdapterType : String read fAdapterType write fAdapterType;
     property LocalHost : String read fLocalHost write fLocalHost;
     property NodeType : String read fNodeType write fNodeType;
+    property DeviceIndex : String read fDeviceIndex write fDeviceIndex;
+    property DeviveName : String read fDeviveName write fDeviveName;
+    property DeviveStatus : String read fDeviveStatus write fDeviveStatus;
 
   end;
 
@@ -47,9 +53,11 @@ begin
 
 end;
 
-constructor TAdapter.Create(aAdapterDescription, aAdapterGateway, aAdapterIndex,
-  aAdapterIPAddress, aAdapterIPv6Address, aAdapterPhysicalAddress,
-  aAdapterSubnetMask, aAdapterType, aLocalHost, aNodeType : String);
+constructor TAdapter.Create(
+      aAdapterDescription, aAdapterGateway, aAdapterIndex,
+      aAdapterIPAddress, aAdapterIPv6Address, aAdapterPhysicalAddress,
+      aAdapterSubnetMask, aAdapterType, aLocalHost, aNodeType,
+      aDeviveName, aDeviceIndex, aDeviveStatus : String);
 begin
   inherited Create();
   Self.fAdapterDescription := aAdapterDescription;
@@ -62,6 +70,9 @@ begin
   Self.fAdapterType := aAdapterType;
   Self.fLocalHost := aLocalHost;
   Self.fNodeType := aNodeType;
+  Self.fDeviceIndex := aDeviceIndex;
+  Self.fDeviveName := aDeviveName;
+  Self.fDeviveStatus := aDeviveStatus;
 
 end;
 
