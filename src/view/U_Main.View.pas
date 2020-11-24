@@ -91,6 +91,7 @@ type
       ARow: Integer; var CanSelect: Boolean);
     procedure MenuItem02ArpClick(Sender: TObject);
     procedure MenuItem02PingClick(Sender: TObject);
+    procedure MenuItem02TracerouteClick(Sender: TObject);
 
   private
     var
@@ -184,6 +185,17 @@ begin
   pingView := TPingView.Create(Self, fAdaptersList[fAdapterIndex].AdapterIPAddress);
   pingView.ShowModal;
   pingView.Free;
+
+end;
+
+procedure TMainView.MenuItem02TracerouteClick(Sender: TObject);
+var
+  traceView : TTracerouteView;
+
+begin
+  traceView := TTracerouteView.Create(Self, fAdaptersList[fAdapterIndex].AdapterIPAddress);
+  traceView.ShowModal;
+  traceView.Free;
 
 end;
 

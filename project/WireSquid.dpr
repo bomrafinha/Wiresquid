@@ -12,14 +12,12 @@ uses
   U_Generic.Functions in '..\src\generic\U_Generic.Functions.pas',
   U_Arp.View in '..\src\view\U_Arp.View.pas' {ArpView},
   U_Ping.View in '..\src\view\U_Ping.View.pas' {PingView},
-  U_Traceroute.View in '..\src\view\U_Traceroute.View.pas' {Form2};
+  U_Traceroute.View in '..\src\view\U_Traceroute.View.pas' {TracerouteView};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.CreateForm(TMainView, MainView);
-  Application.CreateForm(TPingView, PingView);
-  Application.CreateForm(TForm2, Form2);
   Application.Run;
 end.

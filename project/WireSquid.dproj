@@ -215,7 +215,7 @@
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="..\src\view\U_Traceroute.View.pas">
-            <Form>Form2</Form>
+            <Form>TracerouteView</Form>
             <FormType>fmx</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

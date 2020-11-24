@@ -277,6 +277,7 @@ object MainView: TMainView
       object MenuItem02Traceroute: TMenuItem
         Locked = True
         Text = 'Traceroute'
+        OnClick = MenuItem02TracerouteClick
       end
     end
     object MenuItem01Idioma: TMenuItem
