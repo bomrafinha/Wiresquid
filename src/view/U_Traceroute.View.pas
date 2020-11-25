@@ -24,11 +24,19 @@ type
     StatusBar1: TStatusBar;
     Text3: TText;
     ipwTraceRoute1: TipwTraceRoute;
+    Text4: TText;
+    Timer1: TTimer;
     procedure SpeedButton1Click(Sender: TObject);
     procedure ipwTraceRoute1Hop(Sender: TObject; HopNumber: Integer;
       const HostAddress: string; Duration: Integer);
+    procedure Timer1Timer(Sender: TObject);
   private
-    { Private declarations }
+    var
+      fFim : boolean;
+      fTempoTotal : Integer;
+      fMediaTempo : Single;
+      fTempo : TDateTime;
+
   public
     constructor create(Sender : TComponent; address : String);
   end;
@@ -51,18 +59,39 @@ end;
 procedure TTracerouteView.ipwTraceRoute1Hop(Sender: TObject; HopNumber: Integer;
   const HostAddress: string; Duration: Integer);
 begin
-  MemoTrace.Lines.Add(
-    format(
-      '%d  -  %s     %dms',
-      [HopNumber, HostAddress, Duration]
-    )
-  );
-
+  if not fFim then
+  begin
+    inc(fTempoTotal, Duration);
+    MemoTrace.Lines.Add(
+      format(
+        '%d  -  %s     %dms    %s',
+        [HopNumber, HostAddress, Duration, ifthen(ipwTraceRoute1.Idle, 'Final', EmptyStr)]
+      )
+    );
+    if ipwTraceRoute1.Idle then
+    begin
+      fMediaTempo := fTempoTotal / MemoTrace.Lines.Count;
+      Text3.Text := Format(
+        'Tempo total: %dms        Média: %.1fms',
+        [fTempoTotal, fMediaTempo]
+      );
+      Timer1.Enabled := False;
+      fFim := not fFim;
+      ipwTraceRoute1.Reset;
+    end;
+  end;
 end;
 
 procedure TTracerouteView.SpeedButton1Click(Sender: TObject);
 begin
   MemoTrace.Lines.Clear;
+  fFim := False;
+  fTempo := now();
+  fTempoTotal := 0;
+  fMediaTempo := 0;
+  Text3.Text := EmptyStr;
+  Timer1.Enabled := true;
+
   if Edit1.Text <> EmptyStr then
   begin
     with ipwTraceRoute1 do
@@ -73,6 +102,11 @@ begin
     end;
   end;
 
+end;
+
+procedure TTracerouteView.Timer1Timer(Sender: TObject);
+begin
+  Text4.Text := 'Processando: '+ FormatDateTime('hh:nn:ss',  now - fTempo);
 end;
 
 end.
