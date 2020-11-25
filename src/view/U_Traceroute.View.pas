@@ -27,8 +27,6 @@ type
     procedure SpeedButton1Click(Sender: TObject);
     procedure ipwTraceRoute1Hop(Sender: TObject; HopNumber: Integer;
       const HostAddress: string; Duration: Integer);
-    procedure ipwTraceRoute1Error(Sender: TObject; ErrorCode: Integer;
-      const Description: string);
   private
     { Private declarations }
   public
@@ -50,24 +48,12 @@ begin
 
 end;
 
-procedure TTracerouteView.ipwTraceRoute1Error(Sender: TObject;
-  ErrorCode: Integer; const Description: string);
-begin
-
-  MemoTrace.Lines.Add(
-    format(
-      '- %s %d',
-      [Description, ErrorCode]
-    )
-  );
-end;
-
 procedure TTracerouteView.ipwTraceRoute1Hop(Sender: TObject; HopNumber: Integer;
   const HostAddress: string; Duration: Integer);
 begin
   MemoTrace.Lines.Add(
     format(
-      '$d - %s %d',
+      '%d  -  %s     %dms',
       [HopNumber, HostAddress, Duration]
     )
   );
@@ -76,6 +62,7 @@ end;
 
 procedure TTracerouteView.SpeedButton1Click(Sender: TObject);
 begin
+  MemoTrace.Lines.Clear;
   if Edit1.Text <> EmptyStr then
   begin
     with ipwTraceRoute1 do
