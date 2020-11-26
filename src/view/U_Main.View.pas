@@ -165,7 +165,7 @@ var
   arpView : TArpView;
 
 begin
-  arpView := TArpView.Create(Self, ipwIPMonitor1);
+  arpView := TArpView.Create(Self, ipwIPMonitor1.LocalHost);
   arpView.ShowModal;
   arpView.Free;
 

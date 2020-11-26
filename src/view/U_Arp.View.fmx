@@ -29,9 +29,9 @@ object ArpView: TArpView
     Viewport.Width = 626.000000000000000000
     Viewport.Height = 466.000000000000000000
   end
-  object ipwIPMonitor1: TipwIPMonitor
-    OnIPAddress = ipwIPMonitor1IPAddress
+  object ipwICMPPort1: TipwICMPPort
+    OnDataIn = ipwICMPPort1DataIn
     Left = 576
-    Top = 408
+    Top = 424
   end
 end

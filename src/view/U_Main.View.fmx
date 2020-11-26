@@ -258,6 +258,7 @@ object MainView: TMainView
       Text = 'Arquivo'
       object MenuItem02Fechar: TMenuItem
         Locked = True
+        ShortCut = 32883
         Text = 'Fechar'
         OnClick = MenuItem02FecharClick
       end
@@ -270,6 +271,7 @@ object MainView: TMainView
         OnClick = MenuItem02PingClick
       end
       object MenuItem02Arp: TMenuItem
+        Enabled = False
         Locked = True
         Text = 'ARP'
         OnClick = MenuItem02ArpClick

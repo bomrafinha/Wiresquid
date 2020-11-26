@@ -5,16 +5,20 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, ipwipmonitor,
-  FMX.Controls.Presentation, FMX.ScrollBox, FMX.Memo, ipwcore, ipwtypes;
+  FMX.Controls.Presentation, FMX.ScrollBox, FMX.Memo, ipwcore, ipwtypes,
+  ipwicmpport;
 
 type
   TArpView = class(TForm)
     MemoIPs: TMemo;
-    ipwIPMonitor1: TipwIPMonitor;
-    procedure ipwIPMonitor1IPAddress(Sender: TObject; const IpAddress: string);
+    ipwICMPPort1: TipwICMPPort;
     procedure FormShow(Sender: TObject);
+    procedure ipwICMPPort1DataIn(Sender: TObject; MessageType,
+      MessageSubType: Integer; MessageData: string;
+      MessageDataB: TArray<System.Byte>; Checksum: Integer;
+      const SourceAddress: string);
   public
-    constructor Create(Sender : TComponent; aipwIPMonitor1 : TipwIPMonitor);
+    constructor Create(Sender: TComponent; address : String);
   end;
 
 implementation
@@ -23,24 +27,26 @@ implementation
 
 { TArpView }
 
-constructor TArpView.Create(Sender: TComponent; aipwIPMonitor1: TipwIPMonitor);
+constructor TArpView.Create(Sender: TComponent; address : String);
 begin
   inherited Create(Sender);
-  ipwIPMonitor1 := aipwIPMonitor1;
+  ipwICMPPort1.LocalHost := address;
 
 end;
 
 procedure TArpView.FormShow(Sender: TObject);
 begin
   MemoIPs.Lines.Clear;
-  ipwIPMonitor1.ListIPAddresses();
+  ipwICMPPort1.Active := True;
 
 end;
 
-procedure TArpView.ipwIPMonitor1IPAddress(Sender: TObject;
-  const IpAddress: string);
+procedure TArpView.ipwICMPPort1DataIn(Sender: TObject; MessageType,
+  MessageSubType: Integer; MessageData: string;
+  MessageDataB: TArray<System.Byte>; Checksum: Integer;
+  const SourceAddress: string);
 begin
-  MemoIPs.Lines.Add(IpAddress);
+  MemoIPs.Lines.Add(SourceAddress);
 
 end;
 
