@@ -4,7 +4,7 @@ interface
 
 uses
   System.SysUtils, WinApi.ShellApi, FMX.Forms, System.UITypes, Winapi.Windows,
-  System.Classes;
+  System.Classes, Winapi.ShlObj;
 
 type
   TGenericsFunctions = class(TInterfacedObject)
@@ -17,6 +17,7 @@ type
     function intToBinStr(num, tamanho: integer): string;
     function binStrToInt(num: String): Integer;
     procedure launchBrowser(aURL : String);
+    function getSpecialFolder(aFolder: Integer; var Location: String): LongWord;
 
   end;
 
@@ -70,6 +71,41 @@ begin
      Result := '';
   end;
 
+end;
+
+function TGenericsFunctions.getSpecialFolder(aFolder: Integer; var Location: String): LongWord;
+// Retorna o nome do diretorio de alguns diretorios padrões do Windows
+// Incluir ShlObj na clausula Uses
+// aFolder pode ser
+//const
+// Pastas : Array[0..15] of Integer = (CSIDL_BITBUCKET, CSIDL_CONTROLS,
+// CSIDL_DESKTOP, CSIDL_DESKTOPDIRECTORY, CSIDL_DRIVES, CSIDL_FONTS,
+// CSIDL_NETHOOD, CSIDL_NETWORK, CSIDL_PERSONAL, CSIDL_PRINTERS,
+// CSIDL_PROGRAMS, CSIDL_RECENT, CSIDL_SENDTO, CSIDL_STARTMENU,
+// CSIDL_STARTUP, CSIDL_TEMPLATES);
+// Descs : Array[0..15] of String = (´Lixeira´, ´Painel de controle´,
+// ´Área de trabalho´, ´Arquivos da área de trabalho´, ´Meu Computador´,
+// ´Fontes´, ´Ambiente de rede´, ´Hierarquia de rede´, ´Documentos pessoais´,
+// ´Impressoras´, ´Programas do usuário´, ´Documentos´, ´Enviar Para´,
+// ´Menu Iniciar´, ´Grupo Iniciar´, ´Modelos´);
+var
+  pidl: PItemIDList;
+  hRes: HRESULT;
+  RealPath: Array[0..MAX_PATH] of Char;
+  Success: Boolean;
+
+begin
+  Result := 0;
+  hRes := SHGetSpecialFolderLocation(0, aFolder, pidl);
+  if hRes = NO_ERROR then
+  begin
+    Success := SHGetPathFromIDList( pidl, RealPath );
+    if Success then
+      Location := String( RealPath ) + '\'
+    else
+      Result := LongWord( E_UNEXPECTED );
+    end else
+      Result := hRes;
 end;
 
 function TGenericsFunctions.getTOS(tos: Integer): String;

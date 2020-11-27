@@ -10,7 +10,7 @@ uses
   FMX.Layouts, FMX.Menus, FMX.Objects, U_Translation, System.strUtils,
   U_Portuguese, System.Rtti, FMX.Grid.Style, FMX.Grid,
   System.ImageList, FMX.ImgList, U_Generic.Functions, FMX.TreeView,
-  Winapi.Windows, U_Arp.View, U_Ping.View, U_Traceroute.View;
+  Winapi.Windows, U_Arp.View, U_Ping.View, U_Traceroute.View, Winapi.ShlObj;
 
 type
   TMainView = class(TForm)
@@ -74,6 +74,9 @@ type
     MenuItem02Sobre: TMenuItem;
     Text14: TText;
     StringColumn16: TStringColumn;
+    MenuItemSalvar: TMenuItem;
+    SpeedButton4: TSpeedButton;
+    SaveDialog1: TSaveDialog;
     procedure FormShow(Sender: TObject);
     procedure MenuItem02FecharClick(Sender: TObject);
     procedure ipwIPMonitor1IPPacket(Sender: TObject;
@@ -92,6 +95,7 @@ type
     procedure MenuItem02ArpClick(Sender: TObject);
     procedure MenuItem02PingClick(Sender: TObject);
     procedure MenuItem02TracerouteClick(Sender: TObject);
+    procedure SpeedButton4Click(Sender: TObject);
 
   private
     var
@@ -139,6 +143,14 @@ procedure TMainView.ipwIPMonitor1IPPacket(Sender: TObject;
   Offset, TTL, Checksum, IPProtocol: Integer; Payload: string;
   PayloadB: TArray<System.Byte>; Timestamp: Int64);
 begin
+  if StringGridDadosCaptados.RowCount > 0 then
+  begin
+    MenuItemSalvar.Enabled := True;
+    SpeedButton4.Enabled := True;
+  end else begin
+    MenuItemSalvar.Enabled := False;
+    SpeedButton4.Enabled := False;
+  end;
   StringGridDadosCaptados.RowCount := StringGridDadosCaptados.RowCount + 1;
   StringGridDadosCaptados.Cells[0, StringGridDadosCaptados.RowCount - 1] := StringGridDadosCaptados.RowCount.ToString;
   StringGridDadosCaptados.Cells[1, StringGridDadosCaptados.RowCount - 1] := SourceAddress;
@@ -435,6 +447,66 @@ begin
   ipwIPMonitor1.Active := False;
   ipwIPMonitor1.AcceptData := False;
   Timer1.Enabled := False;
+
+end;
+
+procedure TMainView.SpeedButton4Click(Sender: TObject);
+var
+  csv : TStringList;
+  I: Integer;
+  linha : String;
+  pasta : String;
+  arquivo : String;
+
+begin
+  csv := TStringList.Create;
+  csv.Clear();
+  linha := EmptyStr;
+
+  for I := 0 to StringGridDadosCaptados.ColumnCount - 3 do
+  begin
+    linha := format(
+      '%s' + #34 + '%s' + #34 + '%s',
+      [
+        linha,
+        StringGridDadosCaptados.ColumnByIndex(I).Header,
+        IfThen(StringGridDadosCaptados.ColumnCount <> I + 3, #44, EmptyStr)
+      ]
+    );
+  end;
+  csv.Add(linha);
+
+  for I := 0 to StringGridDadosCaptados.RowCount do
+  begin
+    csv.Add(
+      Format(
+        '%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s',
+        [
+          StringGridDadosCaptados.Cells[0, I].QuotedString('"'),
+          StringGridDadosCaptados.Cells[1, I].QuotedString('"'),
+          StringGridDadosCaptados.Cells[2, I].QuotedString('"'),
+          StringGridDadosCaptados.Cells[3, I].QuotedString('"'),
+          StringGridDadosCaptados.Cells[4, I].QuotedString('"'),
+          StringGridDadosCaptados.Cells[5, I].QuotedString('"'),
+          StringGridDadosCaptados.Cells[6, I].QuotedString('"'),
+          StringGridDadosCaptados.Cells[7, I].QuotedString('"'),
+          StringGridDadosCaptados.Cells[8, I].QuotedString('"'),
+          StringGridDadosCaptados.Cells[9, I].QuotedString('"'),
+          StringGridDadosCaptados.Cells[10, I].QuotedString('"'),
+          StringGridDadosCaptados.Cells[11, I].QuotedString('"'),
+          StringGridDadosCaptados.Cells[12, I].QuotedString('"'),
+          StringGridDadosCaptados.Cells[13, I].QuotedString('"')
+        ]
+      )
+    );
+  end;
+
+  fGenericsFunctions.getSpecialFolder(CSIDL_DESKTOP ,pasta);
+  SaveDialog1.InitialDir := pasta;
+  if SaveDialog1.Execute then
+  begin
+    csv.SaveToFile(SaveDialog1.FileName);
+  end;
 
 end;
 
